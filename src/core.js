@@ -1,0 +1,35 @@
+import dataurlConverter from "./modules/dataurl-converter";
+
+export default class {
+  constructor() {
+    if (!window.File && !window.FileReader) {
+      alert("File APIをサポートしていません");
+      return false;
+    }
+
+    this.dataurlConverter = new dataurlConverter();
+    this.dropArea = document.getElementById('dropArea');
+
+    this.dragEvents();
+  }
+  dragEvents() {
+    let self = this;
+    self.dropArea.addEventListener('dragover', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+    });
+    self.dropArea.addEventListener('drop', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      let files = e.dataTransfer.files;
+      self.dataurlConverter.convert(files).then(function(res) {
+        console.log(res);
+      }, function(error) {
+        console.log(error);
+      });
+
+    });
+  }
+}
