@@ -1,5 +1,6 @@
 import dataurlConverter from "./modules/dataurl-converter";
-import player from "./modules/demo-player";
+import demoPlayer from "./modules/demo-player";
+import fileCreator from "./modules/file-creator";
 
 export default class {
   constructor() {
@@ -9,7 +10,8 @@ export default class {
     }
 
     this.dataurlConverter = new dataurlConverter();
-    this.player = new player();
+    this.demoPlayer = new demoPlayer();
+    this.fileCreator;
 
     this.dragEvents();
   }
@@ -45,28 +47,11 @@ export default class {
   dropFile(files) {
     let self = this;
     self.dataurlConverter.convert(files).then(function(res) {
-      self.player.play(res);
-
-      self.splitData(res);
+      self.demoPlayer.play(res);
+      self.fileCreator = new fileCreator(res);
     }, function(error) {
       console.log(error);
     });
   }
 
-  splitData(data) {
-    let result = [],
-        i = 0;
-    data.forEach(function(value) {
-      let max = (i+1)*10;
-      if(value.f >=  max ) i++;
-      if(!result[i]) {
-        result[i] = {
-          'name': 'data' + i + '.json',
-          'data': [],
-        };
-      }
-      result[i].data.push(value);
-    });
-    return result;
-  }
 }
