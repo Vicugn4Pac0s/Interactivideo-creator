@@ -1,12 +1,46 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Template JavaScript</title>
-</head>
-<body>
-  
-  <script src="./main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactivideo Creator</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="i_creator wrap">
+      <h1 class="tit">Interactivideo Creator ver.1.0.0</h1>
+
+      <div class="form">
+        <p class="form_tit">設定</p>
+
+        <div class="form_area">
+          <p class="form_item01 form_item">
+            最大データ数(1ファイル毎):
+            <input id="JS-per" type="number" value="10" min="0" />
+          </p>
+          <p class="form_item02 form_item">
+            フォルダ名(zip): <input id="JS-folder_name" type="text" />
+          </p>
+          <p class="form_item03 form_item" style="display: none">
+            ファイル名(json): <input id="JS-file_name" type="text" />
+          </p>
+        </div>
+
+        <div class="form_submit">
+          <input id="loadFile" type="file" multiple />
+        </div>
+
+        <div id="dropArea" class="form_dropArea">Drop Images Here</div>
+      </div>
+      <div class="result">
+        <div id="demo"><img src="#" /></div>
+        <div id="Downloads">
+          <p class="defaultTxt">Output json files</p>
+        </div>
+        <div id="zipDownload" class="zipBtn">Zip Download</div>
+      </div>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
 </html>
