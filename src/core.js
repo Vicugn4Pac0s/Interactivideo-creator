@@ -1,3 +1,4 @@
+import player from "./modules/demo-player";
 import dataurlConverter from "./modules/dataurl-converter";
 
 export default class {
@@ -7,6 +8,7 @@ export default class {
       return false;
     }
 
+    this.player = new player();
     this.dataurlConverter = new dataurlConverter();
     this.dropArea = document.getElementById('dropArea');
 
@@ -26,6 +28,7 @@ export default class {
       let files = e.dataTransfer.files;
       self.dataurlConverter.convert(files).then(function(res) {
         console.log(res);
+        self.player.play(res);
       }, function(error) {
         console.log(error);
       });
