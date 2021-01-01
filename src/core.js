@@ -46,8 +46,27 @@ export default class {
     let self = this;
     self.dataurlConverter.convert(files).then(function(res) {
       self.player.play(res);
+
+      self.splitData(res);
     }, function(error) {
       console.log(error);
     });
+  }
+
+  splitData(data) {
+    let result = [],
+        i = 0;
+    data.forEach(function(value) {
+      let max = (i+1)*10;
+      if(value.f >=  max ) i++;
+      if(!result[i]) {
+        result[i] = {
+          'name': 'data' + i + '.json',
+          'data': [],
+        };
+      }
+      result[i].data.push(value);
+    });
+    return result;
   }
 }
