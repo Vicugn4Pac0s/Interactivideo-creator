@@ -8,4 +8,4 @@ reproduced or used in any manner whatsoever.
 
 import InteractivideoCreator from "./core";
 
-window.InteractivideoCreator = InteractivideoCreator;
+new InteractivideoCreator();
