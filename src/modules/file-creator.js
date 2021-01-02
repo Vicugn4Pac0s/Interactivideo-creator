@@ -3,16 +3,17 @@ import JSZip from "jszip";
 import { convert_zeroPadding } from "../utilities/utilities";
 
 export default class {
-  constructor(data) {
+  constructor(data, options) {
     this.JSZip = new JSZip();
+    this.options = options;
     this.create(data);
   }
   download(element) {
     let self = this;
     element.innerHTML = 'Please wait...';
     self.JSZip.generateAsync({ type: "blob" }).then(function (content) {
-      FileSaver.saveAs(content, "intaractivideo.zip");
-      element.innerHTML = 'Zip Download';
+      FileSaver.saveAs(content, self.options.zipFileName + ".zip");
+      element.innerHTML = 'Download';
     });
   }
   create(data) {
@@ -36,9 +37,10 @@ export default class {
   }
   splitData(data) {
     let result = [],
-      i = 0;
+      i = 0,
+      per = this.options.per;
     data.forEach(function (value) {
-      let max = (i + 1) * 10;
+      let max = (i + 1) * per;
       if (value.f >= max) i++;
       if (!result[i]) {
         result[i] = {
