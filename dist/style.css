@@ -308,7 +308,6 @@ sup {
 
 .zipBtn {
   background: #83db8b;
-  display: none;
   color: #fff;
   cursor: pointer;
   font-size: 18px;
@@ -394,4 +393,16 @@ sup {
 #demo img {
   max-width: 100%;
   margin: 0 auto;
+}
+
+.result .result_demo,
+.result .result_btn {
+  display: none;
+}
+.result.active .result_demo,
+.result.active .result_btn {
+  display: block;
+}
+.result.active .result_downloads {
+  display: none;
 }

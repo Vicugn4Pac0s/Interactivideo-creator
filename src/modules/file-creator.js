@@ -7,10 +7,12 @@ export default class {
     this.JSZip = new JSZip();
     this.create(data);
   }
-  download() {
+  download(element) {
     let self = this;
+    element.innerHTML = 'Please wait...';
     self.JSZip.generateAsync({ type: "blob" }).then(function (content) {
       FileSaver.saveAs(content, "intaractivideo.zip");
+      element.innerHTML = 'Zip Download';
     });
   }
   create(data) {
